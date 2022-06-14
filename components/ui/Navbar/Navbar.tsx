@@ -24,6 +24,9 @@ const Navbar = () => {
               <Link href="/">
                 <a className={s.link}>Pricing</a>
               </Link>
+              <Link href="/courses">
+                <a className={s.link}>Courses</a>
+              </Link>
               <Link href="/account">
                 <a className={s.link}>Account</a>
               </Link>
