@@ -21,7 +21,7 @@ interface Props {
   children: ReactNode;
 }
 
-function CourseList({ courses }) {
+function CourseList({ courses }: any) {
   return (
     <div className="relative pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
       <div className="absolute inset-0">
@@ -38,7 +38,7 @@ function CourseList({ courses }) {
           </p>
         </div>
         <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
-          {courses.map((post) => (
+          {courses.map((post: any) => (
             <div
               key={post.title}
               className="flex flex-col rounded-lg shadow-lg overflow-hidden"
@@ -55,7 +55,11 @@ function CourseList({ courses }) {
                   <Link href={`/courses/${post.slug}`}>
                     <a className="block mt-2">
                       <p className="text-xl font-semibold ">{post.title}</p>
-                      <p className="mt-3 text-base">{post.description.text}</p>
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: post.description.html
+                        }}
+                      />
                     </a>
                   </Link>
                 </div>
@@ -88,7 +92,7 @@ function CourseList({ courses }) {
   );
 }
 
-export default function Courses({ courses }) {
+export default function Courses({ courses }: any) {
   const router = useRouter();
   const { userLoaded, user, session, userDetails, subscription } = useUser();
 
@@ -113,7 +117,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         coverImage { url }
         date
         title
-        description { text }
+        description { markdown }
       }
     }
     `;
